@@ -4,14 +4,14 @@ import com.saax.gestorweb.model.datamodel.Usuario;
 import java.util.List;
 
 /**
- * Classe de negócios do Dasboard
+ * Business class Dasboard
  *
  * @author Rodrigo
  */
 public class DashboardModel {
 
     
-        // Classes do modelo acessórias acessadas por este model
+   // Classes of accessory model accessed by this model
     private final UsuarioModel usuarioModel;
 
     public DashboardModel() {

@@ -14,7 +14,7 @@ public interface DashboardViewListenter {
 
     public void applyAutoFilter();
 
-    public void removerFiltrosPesquisa();
+    public void removeSearchFilters();
     
 
     

@@ -10,24 +10,25 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 
 /**
- * Presenter da Pagina Inicial Esta classe é responsável captar todos os eventos
- * que ocorrem na View e dar o devido tratamento, utilizando para isto o modelo
+ * This class is responsible for capturing all events
+ *  occurring in view and provide appropriate treatment, using this model
  *
  *
  * @author Rodrigo
  */
 public class StartPagePresenter implements StartPageViewListener, Serializable {
 
-    // Todo presenter mantem acesso à view e ao model
+  
     private final transient StartPageView view;
     private final transient StartPageModel model;
 
-    // Referencia ao recurso das mensagens:
-    private final transient ResourceBundle mensagens = ((GestorMDI) UI.getCurrent()).getMensagens();
-    private final transient GestorWebImagens imagens = ((GestorMDI) UI.getCurrent()).getGestorWebImagens();
+    // message resource
+    private final transient ResourceBundle messages = ((GestorMDI) UI.getCurrent()).getMensagens();
+    // image resource
+    private final transient GestorWebImagens images = ((GestorMDI) UI.getCurrent()).getGestorWebImagens();
 
     /**
-     * Cria o presenter ligando o Model ao View
+     * Creates the presenter connecting the Model and View
      *
      * @param model
      * @param view

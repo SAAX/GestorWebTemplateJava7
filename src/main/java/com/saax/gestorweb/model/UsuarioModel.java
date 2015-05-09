@@ -8,7 +8,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
- * Classe de negócios do objeto Usuario
+ * 
+*User object class of business
  *
  * @author rodrigo
  */

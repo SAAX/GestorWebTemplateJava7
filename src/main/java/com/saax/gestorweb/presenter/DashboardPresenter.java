@@ -12,26 +12,28 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 
 /**
- * Presenter do Dashboard <br>
- * Esta classe é responsável captar todos os eventos que ocorrem na View e dar o
- * devido tratamento, utilizando para isto o modelo.
+ * Dashboard Presenter <br>
+ * This class is responsible capture all events that occur in the View and give the
+ * proper treatment, using this model.
  *
  *
  * @author Rodrigo
  */
 public class DashboardPresenter implements DashboardViewListenter, Serializable {
 
-    // Todo presenter mantem acesso à view e ao model
+    //Creates the presenter connecting the Model and View
     private final transient DashboardView view;
     private final transient DashboardModel model;
 
-    // Referencia ao recurso das mensagens:
+    // message resource
     private final transient ResourceBundle mensagens = ((GestorMDI) UI.getCurrent()).getMensagens();
+    // image resource
     private final transient GestorWebImagens imagens = ((GestorMDI) UI.getCurrent()).getGestorWebImagens();
+    // user resource
     private Usuario loggedUser;
 
     /**
-     * Inicializa o presenter
+     * init the presenter
      */
     @Override
     public void init() {
@@ -50,17 +52,17 @@ public class DashboardPresenter implements DashboardViewListenter, Serializable 
     }
 
     @Override
-    public void removerFiltrosPesquisa() {
+    public void removeSearchFilters() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    // enumeracao do tipo de pesquisa
-    public enum TipoPesquisa {
+    // Enumeration of the type of research
+    public enum ResearchType {
 
         INCLUSIVA_OU, EXCLUSIVA_E
     };
 
     /**
-     * Cria o presenter ligando o Model ao View
+     * Creates the presenter connecting the Model and View
      *
      * @param model
      * @param view
@@ -76,7 +78,7 @@ public class DashboardPresenter implements DashboardViewListenter, Serializable 
     }
 
     /**
-     * Chama o Logout geral do MDI
+     * call the logout
      */
     @Override
     public void logout() {

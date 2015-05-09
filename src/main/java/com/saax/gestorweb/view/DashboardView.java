@@ -322,7 +322,7 @@ public class DashboardView extends VerticalLayout {
         switchAndOrFilters.setVisible(false);
 
         cleanFiltersButton = new Button(messages.getString("DashboardView.cleanFiltersButton"), (Button.ClickEvent event) -> {
-            listener.removerFiltrosPesquisa();
+            listener.removeSearchFilters();
         });
         cleanFiltersButton.setStyleName("link");
         autoFilterLeftContainer.addComponent(cleanFiltersButton);

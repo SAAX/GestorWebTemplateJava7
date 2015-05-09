@@ -20,72 +20,71 @@ import java.util.ResourceBundle;
  */
 public class StartPageView extends HorizontalLayout {
 
-    // Referencia ao recurso das mensagens:
-    private final transient ResourceBundle mensagens = ((GestorMDI) UI.getCurrent()).getMensagens();
-    private final transient GestorWebImagens imagens = ((GestorMDI) UI.getCurrent()).getGestorWebImagens();
+    // message resource
+    private final transient ResourceBundle messages = ((GestorMDI) UI.getCurrent()).getMensagens();
+    // image resource
+    private final transient GestorWebImagens images = ((GestorMDI) UI.getCurrent()).getGestorWebImagens();
 
-    // A view mantem acesso ao listener (Presenter) para notificar os eventos
-    // Este acesso se dá por uma interface para manter a abstração das camadas
+    // listener interface (presenter in MVP)
     private StartPageViewListener listener;
 
     public void setListener(StartPageViewListener listener) {
         this.listener = listener;
     }
 
-    // container que armazenará a caixa com os botões de login / sign-up
-    VerticalLayout containerDireito;
-    // container que armazenará a imagem de fundo
-    VerticalLayout containerEsquerdo;
+    // container that will contain the login button
+    VerticalLayout rightContainer;
+    // container that will contain the image
+    VerticalLayout leftContainer;
 
     /**
-     * Constroi a pagina inicial da aplicação com as imagens de fundo e os
-     * botões para cadastro / login Este container (layout) terá dois outros
-     * containers dentro, um para a imagem de fundo e outro para a caixa com os
-     * botões de login / sign-up
+     * Builds the home page application with background images and
+  buttons to register / login This container (layout) will have two other
+  within containers, one for the background image and one for the box with
+  login button / sign-up
      */
     public StartPageView() {
 
         setSizeFull();
 
-        // container que armazenará a imagem de fundo
-        containerEsquerdo = new VerticalLayout();
-        containerEsquerdo.setHeight(450, Unit.PIXELS);
+        // container that will contain the image
+        leftContainer = new VerticalLayout();
+        leftContainer.setHeight(450, Unit.PIXELS);
 
-        // container que armazenará a caixa com os botões de login / sign-up
-        containerDireito = new VerticalLayout();
-        containerDireito.setHeight(450, Unit.PIXELS);
+    // container that will contain the login button
+        rightContainer = new VerticalLayout();
+        rightContainer.setHeight(450, Unit.PIXELS);
 
-        // @ TODO:
-        Image logo = imagens.getPAGINAINICIAL_LOGO();
-        containerEsquerdo.addComponent(logo);
-        containerEsquerdo.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
+        Image logo = images.getPAGINAINICIAL_LOGO();
+        leftContainer.addComponent(logo);
+        leftContainer.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
 
 
-        // botão para preview do dashboard
+        // button to dashboard
         final Button previewDashboardButton = new Button("dashboard preview", (Button.ClickEvent event) -> {
             ((GestorMDI) UI.getCurrent()).carregarDashBoard();
         });
 
         
-        // botão para preview de nova aba
+        // button to previw of new tab
         BrowserWindowOpener opener = new BrowserWindowOpener("http://google.com");// 
         opener.setWindowName("_blank");// _new, _blank, _top, etc.
 
         final Button previewNewTabButton = new Button("Nova Aba");
         opener.extend(previewNewTabButton);
 
-        // barra dos botoes
+        //button bar
         HorizontalLayout barraBotoes = new HorizontalLayout();
-        containerDireito.addComponent(barraBotoes);
-        containerDireito.setComponentAlignment(barraBotoes, Alignment.MIDDLE_CENTER);
+        rightContainer.addComponent(barraBotoes);
+        rightContainer.setComponentAlignment(barraBotoes, Alignment.MIDDLE_CENTER);
 
         barraBotoes.addComponent(previewDashboardButton);
 
-        // Adicona os dois containers, lado-a-lado
-        addComponent(containerEsquerdo);
-        setComponentAlignment(containerEsquerdo, Alignment.MIDDLE_LEFT);
-        addComponent(containerDireito);
-        setComponentAlignment(containerDireito, Alignment.MIDDLE_RIGHT);
+        // It includes the two containers
+        addComponent(leftContainer);
+        setComponentAlignment(leftContainer, Alignment.MIDDLE_LEFT);
+        addComponent(rightContainer);
+        setComponentAlignment(rightContainer, Alignment.MIDDLE_RIGHT);
 
     }
 

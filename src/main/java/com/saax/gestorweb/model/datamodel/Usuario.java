@@ -23,9 +23,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Entity bean da tabela Usuario com as namequerys configuradas.<br><br>
+ * User entity bean table with the configured named querys.<br><br>
  * 
- * O objetivo desta entidade e armazenar os Usuarios para controle de acesso<br><br>
+ * The aim of this entity and store Users for access control<br><br>
  *
  * @author rodrigo
  */
