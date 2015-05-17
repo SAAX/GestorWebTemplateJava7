@@ -37,5 +37,5 @@
 
     <inherits name="org.vaadin.chatbox.WidgetSet" />
 
-    <inherits name="com.moreira.mavenproject1.AppWidgetSet" />
+    
 </module>

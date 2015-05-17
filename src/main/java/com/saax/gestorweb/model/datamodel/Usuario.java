@@ -1,13 +1,10 @@
 package com.saax.gestorweb.model.datamodel;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.Temporal;
+import static javax.persistence.TemporalType.DATE;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -73,8 +71,8 @@ public class Usuario implements Serializable {
     private String senha;
 
     @Column(name = "datahorainclusao")
-    @Convert(converter = LocalDateTimePersistenceConverter.class)
-    private LocalDateTime dataHoraInclusao;
+    @Temporal(DATE)
+    private Date dataHoraInclusao;
     
     @OneToMany(mappedBy = "usuarioInclusao")
     private List<Usuario> usuariosIncluidos;
@@ -165,11 +163,11 @@ public class Usuario implements Serializable {
         return "com.saax.gestorweb.model.datamodel.Usuario[ idusuario=" + id + " ]";
     }
 
-    public LocalDateTime getDataHoraInclusao() {
+    public Date getDataHoraInclusao() {
         return dataHoraInclusao;
     }
 
-    public void setDataHoraInclusao(LocalDateTime dataHoraInclusao) {
+    public void setDataHoraInclusao(Date dataHoraInclusao) {
         this.dataHoraInclusao = dataHoraInclusao;
     }
 

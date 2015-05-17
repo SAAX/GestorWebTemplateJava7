@@ -61,8 +61,11 @@ public class StartPageView extends HorizontalLayout {
 
 
         // button to dashboard
-        final Button previewDashboardButton = new Button("dashboard preview", (Button.ClickEvent event) -> {
-            ((GestorMDI) UI.getCurrent()).carregarDashBoard();
+        final Button previewDashboardButton = new Button("dashboard preview", new Button.ClickListener() {
+
+            public void buttonClick(Button.ClickEvent event) {
+                ((GestorMDI) UI.getCurrent()).carregarDashBoard();
+            }
         });
 
         

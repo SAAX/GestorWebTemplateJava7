@@ -19,9 +19,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.TreeTable;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.Date;
 import java.util.ResourceBundle;
 import org.vaadin.hene.popupbutton.PopupButton;
 
@@ -139,8 +137,11 @@ public class DashboardView extends VerticalLayout {
 
         createNewByCategoryMenuItem = topMenu.addItem("<h3>" + messages.getString("DashboardView.createNewByCategoryMenuItem") + "</h3>", null, null);
 
-        createNewByTemplate = createNewByCategoryMenuItem.addItem(messages.getString("DashboardView.createNewByTemplate"), (MenuBar.MenuItem selectedItem) -> {
-            listener.createsNewTaskByTemplate();
+        createNewByTemplate = createNewByCategoryMenuItem.addItem(messages.getString("DashboardView.createNewByTemplate"), new MenuBar.Command() {
+
+            public void menuSelected(MenuBar.MenuItem selectedItem) {
+                listener.createsNewTaskByTemplate();
+            }
         });
 
         MenuBar.MenuItem publicationsMenuItem = topMenu.addItem("<h3>" + messages.getString("DashboardView.publicationsMenuItem") + "</h3>", null, null);
@@ -208,8 +209,11 @@ public class DashboardView extends VerticalLayout {
         config.addItem("Config 2", null, null);
         config.addItem("Config 3", null, null);
 
-        topMenu.addItem("<h3>" + messages.getString("DashboardView.logoutMenuItem") + "</h3>", null, (MenuBar.MenuItem selectedItem) -> {
-            listener.logout();
+        topMenu.addItem("<h3>" + messages.getString("DashboardView.logoutMenuItem") + "</h3>", null, new MenuBar.Command() {
+
+            public void menuSelected(MenuBar.MenuItem selectedItem) {
+                listener.logout();
+            }
         });
 
         topContainer.addComponent(topMenu);
@@ -239,25 +243,34 @@ public class DashboardView extends VerticalLayout {
 
         assigneeFilterOptionGroup = new OptionGroup();
         assigneeFilterOptionGroup.setMultiSelect(true);
-        assigneeFilterOptionGroup.addValueChangeListener((Property.ValueChangeEvent event) -> {
-            if (assigneeFilterOptionGroup.getValue() != null) {
-                listener.applyAutoFilter();
+        assigneeFilterOptionGroup.addValueChangeListener(new Property.ValueChangeListener() {
+
+            public void valueChange(Property.ValueChangeEvent event) {
+                if (assigneeFilterOptionGroup.getValue() != null) {
+                    listener.applyAutoFilter();
+                }
             }
         });
 
         requestorsFilterOptionGroup = new OptionGroup();
         requestorsFilterOptionGroup.setMultiSelect(true);
-        requestorsFilterOptionGroup.addValueChangeListener((Property.ValueChangeEvent event) -> {
-            if (requestorsFilterOptionGroup.getValue() != null) {
-                listener.applyAutoFilter();
+        requestorsFilterOptionGroup.addValueChangeListener(new Property.ValueChangeListener() {
+
+            public void valueChange(Property.ValueChangeEvent event) {
+                if (requestorsFilterOptionGroup.getValue() != null) {
+                    listener.applyAutoFilter();
+                }
             }
         });
 
         followersFilterOptionGroup = new OptionGroup();
         followersFilterOptionGroup.setMultiSelect(true);
-        followersFilterOptionGroup.addValueChangeListener((Property.ValueChangeEvent event) -> {
-            if (followersFilterOptionGroup.getValue() != null) {
-                listener.applyAutoFilter();
+        followersFilterOptionGroup.addValueChangeListener(new Property.ValueChangeListener() {
+
+            public void valueChange(Property.ValueChangeEvent event) {
+                if (followersFilterOptionGroup.getValue() != null) {
+                    listener.applyAutoFilter();
+                }
             }
         });
 
@@ -274,9 +287,12 @@ public class DashboardView extends VerticalLayout {
         companyFilterOptionGroup = new OptionGroup();
         companyFilterOptionGroup.setMultiSelect(true);
         companyFilterOptionGroup.setMultiSelect(true);
-        companyFilterOptionGroup.addValueChangeListener((Property.ValueChangeEvent event) -> {
-            if (companyFilterOptionGroup.getValue() != null) {
-                listener.applyAutoFilter();
+        companyFilterOptionGroup.addValueChangeListener(new Property.ValueChangeListener() {
+
+            public void valueChange(Property.ValueChangeEvent event) {
+                if (companyFilterOptionGroup.getValue() != null) {
+                    listener.applyAutoFilter();
+                }
             }
         });
 
@@ -287,9 +303,12 @@ public class DashboardView extends VerticalLayout {
         // filtro por data fim 
         endDateFilterPopupButton = new PopupButton(messages.getString("DashboardView.endDateFilterPopupButton"));
         endDateFilterDateField = new InlineDateField();
-        endDateFilterDateField.addValueChangeListener((Property.ValueChangeEvent event) -> {
-            if (endDateFilterDateField.getValue() != null) {
-                listener.applyAutoFilter();
+        endDateFilterDateField.addValueChangeListener(new Property.ValueChangeListener() {
+
+            public void valueChange(Property.ValueChangeEvent event) {
+                if (endDateFilterDateField.getValue() != null) {
+                    listener.applyAutoFilter();
+                }
             }
         });
 
@@ -298,9 +317,12 @@ public class DashboardView extends VerticalLayout {
 
         forecastFilterOptionGroup = new OptionGroup();
         forecastFilterOptionGroup.setMultiSelect(true);
-        forecastFilterOptionGroup.addValueChangeListener((Property.ValueChangeEvent event) -> {
-            if (forecastFilterOptionGroup.getValue() != null) {
-                listener.applyAutoFilter();
+        forecastFilterOptionGroup.addValueChangeListener(new Property.ValueChangeListener() {
+
+            public void valueChange(Property.ValueChangeEvent event) {
+                if (forecastFilterOptionGroup.getValue() != null) {
+                    listener.applyAutoFilter();
+                }
             }
         });
 
@@ -312,17 +334,23 @@ public class DashboardView extends VerticalLayout {
         switchAndOrFilters = new OptionGroup(messages.getString("DashboardView.switchAndOrFilters"));
         switchAndOrFilters.setMultiSelect(false);
         switchAndOrFilters.addStyleName("horizontal");;
-        switchAndOrFilters.addValueChangeListener((Property.ValueChangeEvent event) -> {
-            if (switchAndOrFilters.getValue() != null) {
-                listener.applyAutoFilter();
+        switchAndOrFilters.addValueChangeListener(new Property.ValueChangeListener() {
+
+            public void valueChange(Property.ValueChangeEvent event) {
+                if (switchAndOrFilters.getValue() != null) {
+                    listener.applyAutoFilter();
+                }
             }
         });
 
         autoFilterLeftContainer.addComponent(switchAndOrFilters);
         switchAndOrFilters.setVisible(false);
 
-        cleanFiltersButton = new Button(messages.getString("DashboardView.cleanFiltersButton"), (Button.ClickEvent event) -> {
-            listener.removeSearchFilters();
+        cleanFiltersButton = new Button(messages.getString("DashboardView.cleanFiltersButton"), new Button.ClickListener() {
+
+            public void buttonClick(Button.ClickEvent event) {
+                listener.removeSearchFilters();
+            }
         });
         cleanFiltersButton.setStyleName("link");
         autoFilterLeftContainer.addComponent(cleanFiltersButton);
@@ -360,7 +388,7 @@ public class DashboardView extends VerticalLayout {
         currentDateContainer.setWidth("100%");
         currentDateContainer.setHeight(null);
 
-        currentDateLabel = new Label("<h1>" + LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + "</h1>");
+        currentDateLabel = new Label("<h1>" + new Date() + "</h1>");
         currentDateLabel.setContentMode(ContentMode.HTML);
 
         currentDateContainer.addComponent(currentDateLabel);
